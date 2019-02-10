@@ -15,7 +15,7 @@ I built this package because I wanted to build an AWS Lambda function source zip
 
 ## Installation
 
-Use the package manager [npm](https://pip.pypa.io/en/stable/) to install `@ryaninvents/plugin-bundle-zip-node`.
+Use the package manager [npm](https://docs.npmjs.com/about-npm/) to install `@ryaninvents/plugin-bundle-zip-node`.
 
 ```bash
 npm install --save-dev @ryaninvents/plugin-bundle-zip-node
