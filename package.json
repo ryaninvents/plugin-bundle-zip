@@ -19,9 +19,6 @@
         {
           "minNodeVersion": "8"
         }
-      ],
-      [
-        "./pkg/dist-node"
       ]
     ]
   },
@@ -30,6 +27,12 @@
     "@pika/plugin-build-node": "^0.3.10",
     "@pika/plugin-standard-pkg": "^0.3.10",
     "@pika/types": "^0.3.1",
+    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/commit-analyzer": "^6.1.0",
+    "@semantic-release/git": "^7.0.8",
+    "@semantic-release/github": "^5.2.10",
+    "@semantic-release/npm": "^5.1.4",
+    "@semantic-release/release-notes-generator": "^7.1.4",
     "@types/gulp": "^4.0.5",
     "@types/gulp-zip": "^4.0.0",
     "@types/node": "^10.12.24",
@@ -40,9 +43,43 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
+    "semantic-release": "^15.13.3",
     "typescript": "^3.3.3"
   },
   "eslintConfig": {
     "extends": "semistandard"
+  },
+  "release": {
+    "branch": "develop",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/npm",
+        {"pkgRoot": "./pkg"}
+      ],
+      "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "pack build",
+    "semantic-release": "semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryaninvents/plugin-bundle-zip.git"
   }
 }
