@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/ryaninvents/plugin-bundle-zip/compare/v1.1.0...v1.2.0) (2019-02-14)
+
+
+### Features
+
+* Add "directory", "bundleName", "sources" options ([c672126](https://github.com/ryaninvents/plugin-bundle-zip/commit/c672126))
+* Add "preserve" option to store files relative to pkg dir ([8b712bc](https://github.com/ryaninvents/plugin-bundle-zip/commit/8b712bc))
+
 # [1.1.0](https://github.com/ryaninvents/plugin-bundle-zip/compare/v1.0.1...v1.1.0) (2019-02-14)
 
 
