@@ -14,16 +14,22 @@ export async function beforeJob ({ out }) {
 }
 
 export async function build ({ out, reporter, options = {} }) {
-  const { preserve = false, sources = ['**'] } = options;
-  const distNode = join(out, 'dist-node');
+  const {
+    preserve = false,
+    sources = ['**'],
+    directory = 'dist-node',
+    bundleName = 'node'
+  } = options;
+  const distNode = join(out, directory);
+  const zipName = `dist-${bundleName}.zip`;
 
   const zipRoot = preserve ? out : distNode;
 
   await promiseFromObjectStream(
     gulp.src(sources, { cwd: zipRoot, base: zipRoot, root: zipRoot, dot: true, buffer: true })
-      .pipe(gulpZip('dist-node.zip'))
+      .pipe(gulpZip(zipName))
       .pipe(gulp.dest(out))
   );
 
-  reporter.created(join(out, 'dist-node.zip'), 'zip:node');
+  reporter.created(join(out, zipName), `zip:${bundleName}`);
 }

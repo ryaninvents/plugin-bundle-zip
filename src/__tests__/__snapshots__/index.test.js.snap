@@ -6,6 +6,12 @@ Array [
 ]
 `;
 
+exports[`@ryaninvents/plugin-bundle-dependencies should honor "directory" and "bundleName" options 1`] = `
+Array [
+  "index.js",
+]
+`;
+
 exports[`@ryaninvents/plugin-bundle-dependencies should honor "preserve" option 1`] = `
 Array [
   "dist-node",

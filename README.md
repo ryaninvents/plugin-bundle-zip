@@ -41,6 +41,8 @@ For more details on setting up Pack, refer to the [@pika/pack repository](https:
 
 ### `preserve`
 
+> Default value: `false`
+
 Preserve the package root -- that is, the zip file will contain everything in the Pika `pkg` directory. **Note:** By default, this will not include the `package.json`.
 
 ```json
@@ -51,6 +53,70 @@ Preserve the package root -- that is, the zip file will contain everything in th
       ["@pika/plugin-build-node"],
       ["@ryaninvents/plugin-bundle-zip-node", {
         "preserve": true
+      }]
+    ]
+  }
+}
+```
+
+### `bundleName`
+
+> Default value: `"node"`
+
+Specify a name for the bundle. The bundle will be stored as `dist-${bundleName}.zip`.
+
+```json
+{
+  "@pika/pack": {
+    "pipeline": [
+      ["@pika/plugin-standard-pkg"],
+      ["@pika/plugin-build-node"],
+      ["@ryaninvents/plugin-bundle-zip-node", {
+        "bundleName": "javascript"
+      }]
+    ]
+  }
+}
+```
+
+### `directory`
+
+> Default value: `"dist-node"`
+
+Choose a different directory to bundle. Note that this will have no effect on bundle name. Also if you have set `preserve: true`, then this option will have no effect.
+
+```json
+{
+  "@pika/pack": {
+    "pipeline": [
+      ["@pika/plugin-standard-pkg"],
+      ["@pika/plugin-build-node"],
+      ["@ryaninvents/plugin-bundle-zip-node", {
+        "directory": "dist-web",
+        "bundleName": "web"
+      }]
+    ]
+  }
+}
+```
+
+### `sources`
+
+> Default value: `["**"]`
+
+Power-user option. Directly specify a set of files to use. Use negation to exclude files; for example, exclude test files using `"!*.test.js"`.
+
+```json
+{
+  "@pika/pack": {
+    "pipeline": [
+      ["@pika/plugin-standard-pkg"],
+      ["@pika/plugin-build-node"],
+      ["@ryaninvents/plugin-bundle-zip-node", {
+        "sources": [
+          "*.js",
+          "!*.test.js"
+        ]
       }]
     ]
   }

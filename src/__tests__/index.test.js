@@ -141,4 +141,51 @@ describe('@ryaninvents/plugin-bundle-dependencies', () => {
     });
     expect(archiveEntries).toMatchSnapshot();
   }, 60e3);
+
+  it('should honor "directory" and "bundleName" options', async () => {
+    const { workingDir } = await initRepo({
+      packageJson: {
+        ...DEFAULT_PKG_JSON,
+        '@pika/pack': {
+          'pipeline': [
+            [
+              '@pika/plugin-standard-pkg'
+            ],
+            [
+              '@pika/plugin-build-node',
+              {
+                'minNodeVersion': '8'
+              }
+            ],
+            [
+              thisPackageName,
+              { directory: 'dist-src', bundleName: 'src' }
+            ]
+          ]
+        },
+        dependencies: {
+          // Use a couple of packages known to basically be one-liners
+          // in order to test quickly
+          'is-sorted': 'latest',
+          'map-obj': 'latest'
+        }
+      },
+      stdio: 'inherit'
+    });
+    await execa('npm', ['run', 'build'], {
+      env: { NODE_ENV: 'production' },
+      cwd: workingDir
+    });
+    expect(async () => fs.access(`${workingDir}/pkg/package.json`, fs.constants.F_OK))
+      .not.toThrow();
+    expect(async () => fs.access(`${workingDir}/pkg/dist-src.zip`, fs.constants.F_OK))
+      .not.toThrow();
+    const archiveEntries = await new Promise((resolve, reject) => {
+      archive.list(`${workingDir}/pkg/dist-src.zip`, (err, results) => {
+        if (err) return reject(err);
+        return resolve(results.map(file => file.getPath()).sort());
+      });
+    });
+    expect(archiveEntries).toMatchSnapshot();
+  }, 60e3);
 });
