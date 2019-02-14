@@ -21,4 +21,6 @@ export async function build ({ out, reporter, options }) {
       .pipe(gulpZip('dist-node.zip'))
       .pipe(gulp.dest(out))
   );
+
+  reporter.created(join(out, 'dist-node.zip'), 'zip:node');
 }
