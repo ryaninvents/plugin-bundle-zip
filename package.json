@@ -12,7 +12,12 @@
   "@pika/pack": {
     "pipeline": [
       [
-        "@pika/plugin-standard-pkg"
+        "@pika/plugin-standard-pkg",
+        {
+          "exclude": [
+            "__tests__/**"
+          ]
+        }
       ],
       [
         "@pika/plugin-build-node",
@@ -23,6 +28,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.3.1",
     "@pika/pack": "^0.3.1",
     "@pika/plugin-build-node": "^0.3.10",
     "@pika/plugin-standard-pkg": "^0.3.10",
@@ -36,6 +42,7 @@
     "@types/gulp": "^4.0.5",
     "@types/gulp-zip": "^4.0.0",
     "@types/node": "^10.12.24",
+    "del": "^3.0.0",
     "eslint": "^5.13.0",
     "eslint-config-semistandard": "^13.0.0",
     "eslint-config-standard": "^12.0.0",
@@ -43,11 +50,59 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
+    "execa": "^1.0.0",
+    "fs-extra": "^7.0.1",
+    "jest": "^24.1.0",
+    "ls-archive": "^1.3.1",
     "semantic-release": "^15.13.3",
+    "temporarily": "^1.1.0",
     "typescript": "^3.3.3"
   },
   "eslintConfig": {
-    "extends": "semistandard"
+    "extends": "semistandard",
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/**",
+          "*.test.js"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ]
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": 8
+          },
+          "modules": false
+        }
+      ]
+    ],
+    "env": {
+      "test": {
+        "presets": [
+          [
+            "@babel/preset-env",
+            {
+              "targets": {
+                "node": 8
+              }
+            }
+          ]
+        ]
+      }
+    }
   },
   "release": {
     "branch": "develop",
@@ -57,7 +112,9 @@
       "@semantic-release/changelog",
       [
         "@semantic-release/npm",
-        {"pkgRoot": "./pkg"}
+        {
+          "pkgRoot": "./pkg"
+        }
       ],
       "@semantic-release/github",
       [
@@ -75,6 +132,7 @@
     "access": "public"
   },
   "scripts": {
+    "test": "jest",
     "build": "pack build",
     "semantic-release": "semantic-release"
   },

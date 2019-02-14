@@ -35,7 +35,27 @@ Then, modify your `@pika/pack` configuration in your `package.json` to enable:
 }
 ```
 
-For more details on setting up Pack, refer to the [@pika/pack repository](https://github.com/pikapkg/pack).
+For more details on setting up Pack, refer to the [@pika/pack repository](https://github.com/pikapkg/pack). For details on configuring `plugin-bundle-zip-node`, keep reading.
+
+## Options
+
+### `preserve`
+
+Preserve the package root -- that is, the zip file will contain everything in the Pika `pkg` directory. **Note:** By default, this will not include the `package.json`.
+
+```json
+{
+  "@pika/pack": {
+    "pipeline": [
+      ["@pika/plugin-standard-pkg"],
+      ["@pika/plugin-build-node"],
+      ["@ryaninvents/plugin-bundle-zip-node", {
+        "preserve": true
+      }]
+    ]
+  }
+}
+```
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

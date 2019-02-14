@@ -13,11 +13,14 @@ export async function beforeJob ({ out }) {
   }
 }
 
-export async function build ({ out, reporter, options }) {
-  const srcGlob = join(out, 'dist-node/**');
+export async function build ({ out, reporter, options = {} }) {
+  const { preserve = false, sources = ['**'] } = options;
+  const distNode = join(out, 'dist-node');
+
+  const zipRoot = preserve ? out : distNode;
 
   await promiseFromObjectStream(
-    gulp.src(srcGlob, { dot: true })
+    gulp.src(sources, { cwd: zipRoot, base: zipRoot, root: zipRoot, dot: true, buffer: true })
       .pipe(gulpZip('dist-node.zip'))
       .pipe(gulp.dest(out))
   );
