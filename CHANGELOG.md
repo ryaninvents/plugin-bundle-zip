@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/ryaninvents/plugin-bundle-zip/compare/v1.3.0...v1.3.1) (2019-02-15)
+
+
+### Bug Fixes
+
+* Remove unused dependency ([a7c7074](https://github.com/ryaninvents/plugin-bundle-zip/commit/a7c7074))
+
 # [1.3.0](https://github.com/ryaninvents/plugin-bundle-zip/compare/v1.2.0...v1.3.0) (2019-02-15)
 
 
