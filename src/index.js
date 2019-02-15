@@ -2,7 +2,6 @@ import gulp from 'gulp';
 import gulpZip from 'gulp-zip';
 import { promiseFromObjectStream } from './p-stream.js';
 import fs from 'fs';
-import es from 'event-stream';
 import Vinyl from 'vinyl';
 import { join } from 'path';
 
