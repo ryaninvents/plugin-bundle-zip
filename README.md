@@ -100,6 +100,29 @@ Choose a different directory to bundle. Note that this will have no effect on bu
 }
 ```
 
+### `manifest`
+
+> Default value: `true` when `"preserve": true`; `false` otherwise
+
+Include the `package.json` in the bundle. Note that this will be the `package.json` as modified by any preceding Pika pipeline steps.
+
+If you set `"manifest": true` while `"preserve": false`, you may end up with unexpected results. Proceed with caution.
+
+```json
+{
+  "@pika/pack": {
+    "pipeline": [
+      ["@pika/plugin-standard-pkg"],
+      ["@pika/plugin-build-node"],
+      ["@ryaninvents/plugin-bundle-zip-node", {
+        "preserve": true,
+        "manifest": true
+      }]
+    ]
+  }
+}
+```
+
 ### `sources`
 
 > Default value: `["**"]`

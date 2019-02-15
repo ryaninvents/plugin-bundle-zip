@@ -6,8 +6,10 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "event-stream": "^4.0.1",
     "gulp": "^4.0.0",
-    "gulp-zip": "^4.2.0"
+    "gulp-zip": "^4.2.0",
+    "vinyl": "^2.2.0"
   },
   "@pika/pack": {
     "pipeline": [

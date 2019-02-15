@@ -18,5 +18,6 @@ Array [
   "dist-node/index.js",
   "dist-src",
   "dist-src/index.js",
+  "package.json",
 ]
 `;
