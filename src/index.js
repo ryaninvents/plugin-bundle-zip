@@ -20,7 +20,8 @@ export async function build ({ out, reporter, manifest, options = {} }) {
     sources = ['**'],
     directory = 'dist-node',
     bundleName = 'node',
-    manifest: includeManifest = preserve
+    manifest: includeManifest = preserve,
+    epoch = true
   } = options;
   const distNode = join(out, directory);
   const zipName = `dist-${bundleName}.zip`;
@@ -28,6 +29,11 @@ export async function build ({ out, reporter, manifest, options = {} }) {
   const zipRoot = preserve ? out : distNode;
 
   const sourcesStream = gulp.src(sources, { cwd: zipRoot, base: zipRoot, root: zipRoot, dot: true, buffer: true });
+
+  const opts = {};
+  if (epoch) {
+    opts.modifiedTime = new Date(0);
+  }
 
   if (includeManifest) {
     const pkgJson = new Vinyl({
@@ -41,7 +47,7 @@ export async function build ({ out, reporter, manifest, options = {} }) {
 
   await promiseFromObjectStream(
     sourcesStream
-      .pipe(gulpZip(zipName))
+      .pipe(gulpZip(zipName, opts))
       .pipe(gulp.dest(out))
   );
 

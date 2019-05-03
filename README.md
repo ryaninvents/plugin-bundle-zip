@@ -146,6 +146,12 @@ Power-user option. Directly specify a set of files to use. Use negation to exclu
 }
 ```
 
+### `epoch`
+
+> Default value: `true`
+
+When `true`, the zip file will always be created with the same timestamp. Set to `false` to generate correct timestamps.
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
