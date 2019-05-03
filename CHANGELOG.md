@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/ryaninvents/plugin-bundle-zip/compare/v1.3.1...v1.4.0) (2019-05-03)
+
+
+### Features
+
+* permit reproducible zipfiles via `epoch` flag ([f315e47](https://github.com/ryaninvents/plugin-bundle-zip/commit/f315e47))
+
 ## [1.3.1](https://github.com/ryaninvents/plugin-bundle-zip/compare/v1.3.0...v1.3.1) (2019-02-15)
 
 
